@@ -1,8 +1,8 @@
 const axios = require('axios');
 const fs = require('fs');
-const config = require('./config');
+const config = require('./config-loader');
 
-const username = config.github_username;
+const username = config.getGithubUsername();
 const URL = `https://api.github.com/users/${username}/repos`;
 
 async function fetchRepos(url) {
@@ -13,7 +13,7 @@ async function fetchRepos(url) {
 		return axios.get(url, {
 			params: {
 				page: page,
-				access_token: config.access_token,
+				access_token: config.getAccessToken(),
 			},
 		}).then(res => {
 			repoCount = 0;
@@ -43,7 +43,7 @@ async function fetchRepos(url) {
 }
 
 fetchRepos(URL).then(result => {
-	console.log('Forked repos found:', result.length);
+	console.log('Repos found:', result.length);
 	console.log(result);
 	fs.writeFileSync('repos.json', JSON.stringify(result, null, 2));
 });

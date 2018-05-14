@@ -1,6 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
-const config = require('./config');
+const config = require('./config-loader');
 
 const reposForDeletion = JSON.parse(fs.readFileSync('repos.json'));
 
@@ -12,7 +12,7 @@ function deleteRepos(repos) {
 			method: 'delete',
 			url: URL,
 			params: {
-				access_token: config.access_token,
+				access_token: config.getAccessToken(),
 			},
 		}).then(() => {
 			console.log(`${repo} deleted!`);
