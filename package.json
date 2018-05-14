@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "node src/fetch-repos.js && node src/delete-repos.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "echo 'Cleaning up.'"
   },
   "author": "Yangshun Tay & Lincoln Baxter, III",
   "license": "MIT"
